@@ -123,7 +123,7 @@ public:
 	
 	int rank(T k)
 	{
-		return get_order(root, k);
+		return rank(root, k);
 	}
 
 	void insert(T value)
