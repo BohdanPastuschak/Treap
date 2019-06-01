@@ -111,10 +111,26 @@ private:
 		else
 			return rank(v->right, k) + getCnt(v->left) + 1;
 	}
+	
+	
+	void clear(Node* v)
+	{
+		if (v == NULL)
+			return;
+		clear(v->left);
+		clear(v->right);
+		delete(v);
+	}
+	
 
 public:
 
 	Treap(){root = NULL;}
+	
+	~Treap()
+	{
+		clear(root);
+	}
 	
 	T select(int k)
 	{
@@ -146,8 +162,10 @@ public:
 		split(root, value - 1 , l, r);
 		split(r, value, m, r);
 		root = merge(l, r);	
+		delete(m);
 	}
 };
+
 
 int main()
 {
