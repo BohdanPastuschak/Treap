@@ -267,70 +267,77 @@ public:
 
 int main()
 {
-	int n, m;
-	scanf("%d %d", &n, &m);
-	vector<int> a(n);
-	for (int i = 0; i < n; i++)
-		scanf("%d", &a[i]);
-	
-	Treap treap(a);
-	
-	for (int i = 0; i < m; i++)
+	int tests;
+	scanf("%d", &tests);
+	for(int test = 0; test < tests; ++test)
 	{
-		int type;
-		scanf("%d", &type);
-		if (type == 1)
-		{
-			int l, r;
-			scanf("%d %d", &l, &r);
-			treap.reverseSegment(l, r - l + 1);
-		}
+		int n, m;
+		scanf("%d %d", &n, &m);
+		vector<int> a(n);
+		for (int i = 0; i < n; i++)
+			scanf("%d", &a[i]);
 		
-		if (type == 2)
-		{
-			int l, r, value;
-			scanf("%d %d %d", &l, &r, &value);
-			treap.addOnSegment(l, r - l + 1, value);
-		}
+		Treap treap(a);
 		
-		if (type == 3)
+		for (int i = 0; i < m; i++)
 		{
-			int l, r, newPlace;
-			scanf("%d %d %d", &l, &r, &newPlace);
-			treap.replaceSegment(l, r - l + 1, newPlace);
-		}
-		
-		if (type == 4)
-		{
-			int l, r;
-			scanf("%d %d", &l, &r);
-			printf("%lld\n", treap.sumOnSegment(l, r - l + 1));
-		}
-		
-		if (type == 5)
-		{
-			int l, r, shift;
-			scanf("%d %d %d", &l, &r, &shift);
-			treap.cyclicShiftOfSegment(l, r - l + 1, shift);
-		}
-		
-		if (type == 6)
-		{
-			int l, r;
-			scanf("%d %d", &l, &r);
-			printf("%d\n", treap.maximumOnSegment(l, r - l + 1));
-		}
-		
-		if (type == 7)
-		{
-			int l, r;
-			scanf("%d %d", &l, &r);
-			printf("%d\n", treap.minimumOnSegment(l, r - l + 1));
-		}
-	}		
+			int type;
+			scanf("%d", &type);
+			if (type == 1)
+			{
+				int l, r;
+				scanf("%d %d", &l, &r);
+				treap.reverseSegment(l, r - l + 1);
+			}
+			
+			if (type == 2)
+			{
+				int l, r, value;
+				scanf("%d %d %d", &l, &r, &value);
+				treap.addOnSegment(l, r - l + 1, value);
+			}
+			
+			if (type == 3)
+			{
+				int l, r, newPlace;
+				scanf("%d %d %d", &l, &r, &newPlace);
+				treap.replaceSegment(l, r - l + 1, newPlace);
+			}
+			
+			if (type == 4)
+			{
+				int l, r;
+				scanf("%d %d", &l, &r);
+				printf("%lld\n", treap.sumOnSegment(l, r - l + 1));
+			}
+			
+			if (type == 5)
+			{
+				int l, r, shift;
+				scanf("%d %d %d", &l, &r, &shift);
+				treap.cyclicShiftOfSegment(l, r - l + 1, shift);
+			}
+			
+			if (type == 6)
+			{
+				int l, r;
+				scanf("%d %d", &l, &r);
+				printf("%d\n", treap.maximumOnSegment(l, r - l + 1));
+			}
+			
+			if (type == 7)
+			{
+				int l, r;
+				scanf("%d %d", &l, &r);
+				printf("%d\n", treap.minimumOnSegment(l, r - l + 1));
+			}
+		}		
+	}
 	
-	cerr << "Time elapsed: " << clock() / (double)CLOCKS_PER_SEC << endl;
+	double time = 	clock() / (double)CLOCKS_PER_SEC;
+	double average = time / tests;
+	
+	cerr << "Time elapsed: " << time << endl;
+	cerr << "Average time: " << average << endl;
 	return 0;
 }
-
-
