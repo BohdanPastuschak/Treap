@@ -112,7 +112,6 @@ private:
 			return rank(v->right, k) + getCnt(v->left) + 1;
 	}
 	
-	
 	void clear(Node* v)
 	{
 		if (v == NULL)
@@ -122,7 +121,6 @@ private:
 		delete(v);
 	}
 	
-
 public:
 
 	Treap(){root = NULL;}
@@ -164,45 +162,61 @@ public:
 		root = merge(l, r);	
 		delete(m);
 	}
-};
 
+	T lower_bound(T value)
+	{
+		return lower_bound(root, value);		
+	}
+};
 
 int main()
 {
-	Treap<int> treap;//making cartesian tree
-	int n;//number of operations
-	scanf("%d", &n);
-	long long result = 0;//in order to not output many values, 
-						 //let's calcutlate only some hash function 
-						 //to see whether our results in both programs are equal
-	
-	for (int i = 0; i < n; i++)
+	int tests;
+	scanf("%d", &tests);
+	for(int test = 0; test < tests; ++test)
 	{
-		int type;//type of operation: 0 for insert, 1 for select, 2 for rank
-		scanf("%d", &type);
-		if (type == 0)
+		Treap<int> treap;//making cartesian tree
+		int n;//number of operations
+		scanf("%d", &n);
+		
+		for (int i = 0; i < n; i++)
 		{
-			int k;//value to insert
-			scanf("%d", &k);
-			treap.insert(k);//inserting new value
+			int type;//type of operation: 0 for insert, 1 for select, 2 for rank, 3 for erase
+			scanf("%d", &type);
+			if (type == 0)
+			{
+				int k;//value to insert
+				scanf("%d", &k);
+				treap.insert(k);//inserting new value
+			}		
+			
+			if (type == 1)
+			{
+				int k;//value to select
+				scanf("%d", &k);
+				printf("%d\n", treap.select(k));//selecting k
+			}
+			
+			if (type == 2)
+			{
+				int k;//value to rank
+				scanf("%d", &k);
+				printf("%d\n", treap.rank(k));//rank of k
+			}
+			
+			if (type == 3)
+			{
+				int k;//value to erase
+				scanf("%d", &k);
+				treap.erase(k);//erasing value
+			}	
 		}		
-		
-		if (type == 1)
-		{
-			int k;//value to select
-			scanf("%d", &k);
-			result += treap.select(k);//selecting k
-		}
-		
-		if (type == 2)
-		{
-			int k;//value to rank
-			scanf("%d", &k);
-			result += treap.rank(k);//rank of k
-		}
-	}		
+	}
 	
-	printf("%lld\n", result);
-	cerr << "Time elapsed: " << clock() / (double)CLOCKS_PER_SEC << endl;//to measure total time
+	double time = clock() / (double) CLOCKS_PER_SEC;
+	double average = time / tests;
+	
+	cerr << "Time elapsed: " << time << endl;
+	cerr << "Average time: " << average << endl;
 	return 0;
 }
